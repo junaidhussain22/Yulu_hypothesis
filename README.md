@@ -1,86 +1,114 @@
-# Yulu_hypothesis
-Yulu is India’s leading micro-mobility service provider, which offers unique vehicles for the daily commute. Starting off as a mission to eliminate traffic congestion in India, Yulu provides the safest commute solution through a user-friendly mobile app to enable shared, solo and sustainable commuting.
+# Yulu Hypothesis Testing: Understanding Demand Drivers for Shared Electric Cycles
 
+## 🚲 Project Overview
 
-How you can help here?
+Yulu is India’s leading micro-mobility service provider, offering unique vehicles for daily commutes. With a mission to eliminate traffic congestion and promote sustainable travel, Yulu provides a user-friendly mobile app for shared, solo, and eco-friendly commuting.
 
-The company wants to know:
+This project analyzes Yulu’s electric cycle rental data to identify which variables significantly predict demand in the Indian market and how well these variables explain electric cycle usage. The analysis leverages statistical hypothesis testing and exploratory data analysis (EDA) to provide actionable business insights.
 
-Which variables are significant in predicting the demand for shared electric cycles in the Indian market?
-How well those variables describe the electric cycle demands
+---
 
-Dataset:
+## 🏆 Business Problem
 
-Dataset Link: yulu_data.csv
+**Objective:**  
+- Identify significant variables that predict the demand for shared electric cycles in India.
+- Quantify how well these variables explain demand.
+- Provide data-driven recommendations to optimize Yulu’s operations and growth.
 
+---
 
-Column Profiling:
+## 📁 Dataset Description
 
-datetime: datetime
-season: season (1: spring, 2: summer, 3: fall, 4: winter)
-holiday: whether day is a holiday or not (extracted from http://dchr.dc.gov/page/holiday-schedule)
-workingday: if day is neither weekend nor holiday is 1, otherwise is 0.
-weather:
-1: Clear, Few clouds, partly cloudy, partly cloudy
-2: Mist + Cloudy, Mist + Broken clouds, Mist + Few clouds, Mist
-3: Light Snow, Light Rain + Thunderstorm + Scattered clouds, Light Rain + Scattered clouds
-4: Heavy Rain + Ice Pallets + Thunderstorm + Mist, Snow + Fog
-temp: temperature in Celsius
-atemp: feeling temperature in Celsius
-humidity: humidity
-windspeed: wind speed
-casual: count of casual users
-registered: count of registered users
-count: count of total rental bikes including both casual and registered
+**Dataset:** [yulu_data.csv](#)
 
-Concept Used:
+**Columns:**
+- `datetime`: Date and time of the record
+- `season`: Season (1: spring, 2: summer, 3: fall, 4: winter)
+- `holiday`: Whether the day is a holiday (1: Yes, 0: No)
+- `workingday`: 1 if the day is a working day, 0 otherwise
+- `weather`: Weather situation (1: Clear, 2: Mist, 3: Light Snow/Rain, 4: Heavy Rain/Snow)
+- `temp`: Temperature in Celsius
+- `atemp`: "Feels like" temperature in Celsius
+- `humidity`: Humidity level
+- `windspeed`: Wind speed
+- `casual`: Count of casual users
+- `registered`: Count of registered users
+- `count`: Total rental bikes (casual + registered)
 
-Bi-Variate Analysis
-2-sample t-test: testing for difference across populations
-ANNOVA
-Chi-square
+---
 
-How to begin:
+## 📝 Analysis Approach
 
-Import the dataset and do usual exploratory data analysis steps like checking the structure & characteristics of the dataset
-Try establishing a relation between the dependent and independent variable (Dependent “Count” & Independent: Workingday, Weather, Season etc)
-Select an appropriate test to check whether:
-Working Day has effect on number of electric cycles rented
-No. of cycles rented similar or different in different seasons
-No. of cycles rented similar or different in different weather
-Weather is dependent on season (check between 2 predictor variable)
-Set up Null Hypothesis (H0)
-State the alternate hypothesis (H1)
-Check assumptions of the test (Normality, Equal Variance). You can check it using Histogram, Q-Q plot or statistical methods like levene’s test, Shapiro-wilk test (optional)
-Please continue doing the analysis even If some assumptions fail (levene’s test or Shapiro-wilk test) but double check using visual analysis and report wherever necessary
-Set a significance level (alpha)
-Calculate test Statistics.
-Decision to accept or reject null hypothesis.
-Inference from the analysis
+### 1. Problem Definition & Exploratory Data Analysis (EDA)
+- Define the business problem and objectives
+- Examine data structure, types, and missing values
+- Convert categorical variables as needed
+- Generate statistical summaries
 
-Evaluation Criteria (50 Points):
+### 2. Univariate Analysis
+- Distribution plots for continuous variables (e.g., temp, humidity, count)
+- Barplots/countplots for categorical variables (e.g., season, weather, workingday)
 
-Define Problem Statement and perform Exploratory Data Analysis (10 points)
-Definition of problem (as per given problem statement with additional views)
-Observations on shape of data, data types of all the attributes, conversion of categorical attributes to 'category' (If required) , missing value detection, statistical summary.
-Univariate Analysis (distribution plots of all the continuous variable(s) barplots/countplots of all the categorical variables)
-Bivariate Analysis (Relationships between important variables such as workday and count, season and count, weather and count.
-Illustrate the insights based on EDA
-Comments on range of attributes, outliers of various attributes
-Comments on the distribution of the variables and relationship between them
-Comments for each univariate and bivariate plots
-Hypothesis Testing (30 Points):
-2- Sample T-Test to check if Working Day has an effect on the number of electric cycles rented (10 points)
-ANNOVA to check if No. of cycles rented is similar or different in different 1. weather 2. season (10 points)
-Chi-square test to check if Weather is dependent on the season (10 points)
-Notebook Quality (10 points):
-Structure & Flow
-Well commented code
-What good looks like (distribution of 10 points):
+### 3. Bivariate Analysis
+- Explore relationships between key variables (e.g., workingday vs. count, season vs. count, weather vs. count)
+- Visualize and comment on trends, outliers, and correlations
 
-Visual analysis (1)
-Hypothesis formulation (1)
-Select the appropriate test (1)
-Check test assumptions (2)
-Find the p-value(1)
-Conclusion based on the p-value (2)
+### 4. Hypothesis Testing
+- **2-Sample T-Test:**  
+  Test if working days affect the number of electric cycles rented
+- **ANOVA:**  
+  Test if the number of cycles rented differs across seasons and weather conditions
+- **Chi-Square Test:**  
+  Test if weather is dependent on season
+
+#### Steps for Each Test:
+- Formulate null (H0) and alternate (H1) hypotheses
+- Check assumptions (normality, equal variance) using visual and statistical methods
+- Set significance level (alpha)
+- Calculate test statistics and p-values
+- Draw conclusions and business inferences
+
+---
+
+## 📈 Key Questions Explored
+
+- Does being a working day impact electric cycle demand?
+- Is demand for cycles similar or different across seasons?
+- Does weather significantly affect rental counts?
+- Are weather and season statistically dependent?
+
+---
+
+## 🔍 Example Insights
+
+- **Working Days:**  
+  Rental counts are significantly higher on working days, suggesting commuter-driven demand.
+- **Seasonality:**  
+  Demand peaks in certain seasons, indicating opportunities for targeted promotions.
+- **Weather Impact:**  
+  Poor weather conditions reduce rentals, highlighting the need for flexible fleet management.
+- **Variable Relationships:**  
+  Weather and season are statistically dependent, which can inform demand forecasting models.
+
+---
+
+## 💡 Business Recommendations
+
+- **Target Working Days:**  
+  Focus marketing and fleet availability on working days to maximize utilization.
+- **Seasonal Promotions:**  
+  Launch campaigns during high-demand seasons to boost ridership.
+- **Weather-Responsive Operations:**  
+  Adjust fleet deployment and maintenance based on weather forecasts.
+- **Data-Driven Planning:**  
+  Use insights from statistical tests to refine demand prediction and resource allocation.
+
+---
+
+## 🛠️ Technologies Used
+
+- **Python:** Data analysis and preprocessing (Pandas, NumPy, SciPy, Statsmodels)
+- **Visualization:** Matplotlib, Seaborn
+- **Jupyter Notebook:** For interactive EDA and hypothesis testing
+
+---
